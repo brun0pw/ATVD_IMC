@@ -1,11 +1,45 @@
 import os
+from dataclasses import dataclass
 
 # Função sem retorno.
 def logoSenai():
     os.system("cls || clear")
     print("=== SENAI === ")
+import os
+os.system("cls || clear")
+
+def imc (n1, n2):
+    imc_total = imc_peso / pow(imc_altura, 2)
+    return imc_total
+
+def resultadodeimc (imc_total):
+   if imc_total < 18:
+        return "você está abaixo do peso\nconsulte um  nutricionista para orientação"
+   elif imc_total > 18.5 and imc_total < 24.9:
+       return "você está com peso normal\nMantenha hábitos saudaveis!"
+   elif imc_total > 25 and imc_total < 29.9:
+       return "você está com sobrepeso\nConsidere uma dieta saudavel e atividade fisica!"
+   elif imc_total > 30 and imc_total < 34.9:
+       return "você está com obesidade grau 1\nprocure orientação de um profissional de saúde!"
+   elif imc_total > 35 and imc_total < 39.9:
+       return "você está com obesidade grau 2\nconsulte um medico para orientação"
+   elif imc_total > 40  :
+       return "você está com obesidade grau 3\nbusque assistência medica imiediatamente "
+ 
+       
+@dataclass
+class Pessoa:
+    nome :str
+    sobrenome: str
+    idade: int
+    altura: float
+    peso: float
+    indice_massa_corporea : float
+    situacao_da_pessoa : str
+
 
 # Definindo listas vazias para armazenar os dados dos usuários
+lista_pessoa = []
 nomes = []
 idades = []
 alturas = []
@@ -15,28 +49,36 @@ pesos = []
 while True:
     logoSenai()
     nome = input("Digite o nome do usuário (ou digite 'sair' para encerrar): ")
-    
     # Verificando se o usuário quer sair
     if nome.lower() == 'sair':
         break
-    
+    sobrenome = input("Digite o seu sobrenome: ")
     idade = int(input("Digite a idade do usuário: "))
-    altura = float(input("Digite a altura do usuário (em metros): "))
-    peso = float(input("Digite o peso do usuário (em quilogramas): "))
+    imc_peso = float(input("Digite seu peso: "))
+    imc_altura = float(input("Digite sua altura: "))
+    imc_total = imc(imc_peso, imc_altura)
+    resultado_de_imc1 = resultadodeimc(imc_total)
+    pessoa = Pessoa(nome = nome, sobrenome = sobrenome, idade= int(idade), altura=float(imc_altura), peso = float(imc_peso), indice_massa_corporea= float(imc_total), situacao_da_pessoa = resultado_de_imc1)
+    lista_pessoa.append(pessoa)
     
     # Adicionando os dados às listas
-    nomes.append(nome)
-    idades.append(idade)
-    alturas.append(altura)
-    pesos.append(peso)
-
+    nomes.append(pessoa.nome)
+    idades.append(pessoa.idade)
+    alturas.append(pessoa.altura)
+    pesos.append(pessoa.peso)
 # Exibindo os dados armazenados
 logoSenai()
+indice_massa_corporea =imc(imc_altura, imc_peso)
 print("\nDados dos usuários:")
-for i in range(len(nomes)):
-    print(f"Usuário {i+1}:")
-    print("Nome:", nomes[i])
-    print("Idade:", idades[i])
-    print("Altura:", alturas[i], "metros")
-    print("Peso:", pesos[i], "quilogramas")
-    print()
+for impressao in lista_pessoa:
+    print("Usuário {len(lista_pessoa)}:")
+    print(f"Nome: {impressao.nome}, {impressao.sobrenome}")
+    print(f"Idade:, {impressao.idade}")
+    print(f"Altura:, {impressao.altura}, metros")
+    print(f"Peso:, {impressao.peso}, quilogramas")
+    print(f"seu imc é de: {impressao.indice_massa_corporea}")
+    print(f"Situação do usuario é: {impressao.situacao_da_pessoa}" )
+    
+
+
+
