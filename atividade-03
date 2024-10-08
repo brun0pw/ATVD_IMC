@@ -8,7 +8,7 @@ def logoSenai():
 import os
 os.system("cls || clear")
 
-def imc (n1, n2):
+def imc (imc_peso, imc_altura):
     imc_total = imc_peso / pow(imc_altura, 2)
     return imc_total
 
@@ -52,23 +52,29 @@ while True:
     # Verificando se o usuário quer sair
     if nome.lower() == 'sair':
         break
+    #pedindo os dados ao user
     sobrenome = input("Digite o seu sobrenome: ")
     idade = int(input("Digite a idade do usuário: "))
     imc_peso = float(input("Digite seu peso: "))
     imc_altura = float(input("Digite sua altura: "))
+    #atribuindo os valores pro def
     imc_total = imc(imc_peso, imc_altura)
     resultado_de_imc1 = resultadodeimc(imc_total)
+    indice_massa_corporea =imc(imc_altura, imc_peso)
+    #colocando todos os dados na dataclass
     pessoa = Pessoa(nome = nome, sobrenome = sobrenome, idade= int(idade), altura=float(imc_altura), peso = float(imc_peso), indice_massa_corporea= float(imc_total), situacao_da_pessoa = resultado_de_imc1)
+    #colocando tod os dados na lista pessoa
     lista_pessoa.append(pessoa)
     
+    
+    #parte removida
     # Adicionando os dados às listas
-    nomes.append(pessoa.nome)
-    idades.append(pessoa.idade)
-    alturas.append(pessoa.altura)
-    pesos.append(pessoa.peso)
+    #nomes.append(pessoa.nome)
+    #idades.append(pessoa.idade)
+    #alturas.append(pessoa.altura)
+    #pesos.append(pessoa.peso)
 # Exibindo os dados armazenados
 logoSenai()
-indice_massa_corporea =imc(imc_altura, imc_peso)
 print("\nDados dos usuários:")
 for impressao in lista_pessoa:
     print("Usuário {len(lista_pessoa)}:")
